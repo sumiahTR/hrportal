@@ -150,6 +150,73 @@
                   </li>
                 @endguest
               </ul>
+              <ul class="navbar-nav ml-auto d-md-none d-lg-none d-xl-none">
+                @can('isAdmin')
+                <li class="nav-item">
+                  <a class="nav-link" href="/home">
+                    <span data-feather="home"></span>
+                    Dashboard <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/staffs">
+                    <span data-feather="users"></span>
+                    Staffs
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/requests">
+                    <span data-feather="bell"></span>
+                    Requests
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/leaves">
+                    <span data-feather="layers"></span>
+                    leaves
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/holidays">
+                    <span data-feather="bar-chart-2"></span>
+                    Holidays
+                  </a>
+                </li>
+                <!--<li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="dollar-sign"></span>
+                    Salary
+                  </a>
+                </li>-->
+                @endcan
+
+                @can('isEmployee')
+                <li class="nav-item">
+                  <a class="nav-link" href="/employee/home">
+                    <span data-feather="home"></span>
+                    Dashboard <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/employee/requests">
+                    <span data-feather="bell"></span>
+                    Leave Requests
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/holidays">
+                    <span data-feather="bar-chart-2"></span>
+                    Holidays
+                  </a>
+                </li>
+                <!--<li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="dollar-sign"></span>
+                    Salary Report
+                  </a>
+                </li>-->
+                @endcan
+              </ul>
             </div>
           </div>
         </nav>
