@@ -139,6 +139,9 @@
                                        document.getElementById('logout-form').submit();">
                           {{ __('Logout') }}
                       </a>
+                      <a class="dropdown-item" href="/users/change_password">
+                        Change Password
+                      </a>
 
                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                           @csrf
@@ -152,14 +155,112 @@
         </nav>
 
     <main class="pt-1">
-      
+      <div class="container-fluid">
+        <div class="row">
+          <nav class="col-md-2 d-none d-md-block bg-white sidebar shadow">
+            <div class="sidebar-sticky">
+              <ul class="nav flex-column" id="nav">
+                @can('isAdmin')
+                <li class="nav-item">
+                  <a class="nav-link" href="/home">
+                    <span data-feather="home"></span>
+                    Dashboard <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/staffs">
+                    <span data-feather="users"></span>
+                    Staffs
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/requests">
+                    <span data-feather="bell"></span>
+                    Requests
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/leaves">
+                    <span data-feather="layers"></span>
+                    leaves
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/holidays">
+                    <span data-feather="bar-chart-2"></span>
+                    Holidays
+                  </a>
+                </li>
+                <!--<li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="dollar-sign"></span>
+                    Salary
+                  </a>
+                </li>-->
+                @endcan
+
+                @can('isEmployee')
+                <li class="nav-item">
+                  <a class="nav-link" href="/employee/home">
+                    <span data-feather="home"></span>
+                    Dashboard <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/employee/requests">
+                    <span data-feather="bell"></span>
+                    Leave Requests
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/holidays">
+                    <span data-feather="bar-chart-2"></span>
+                    Holidays
+                  </a>
+                </li>
+                <!--<li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <span data-feather="dollar-sign"></span>
+                    Salary Report
+                  </a>
+                </li>-->
+                @endcan
+              </ul>
+
+            </div>
+          </nav>
+
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
             @yield('content')
 
+          </main>
+        </div>
+      </div>
     </main>
     
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+      <script type="text/javascript">
+        (function () {
+          'use strict'
+          feather.replace()
+        }())
+      </script>
 
+      <script type="text/javascript">
+        $(function(){
+            var current = location.pathname;
+            $('#nav li a').each(function(){
+                var $this = $(this);
+                // if the current path is like this link, make it active
+                if(($this.attr('href').indexOf(current) !== -1) || (current.includes($this.attr('href')))){
+                    $this.addClass('active');
+                }
+            })
+        })
+      </script>
 </body>
 </html>
 </body>
