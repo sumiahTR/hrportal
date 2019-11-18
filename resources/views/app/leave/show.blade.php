@@ -66,7 +66,7 @@
       <div class="col-md-3">
           <label>Reason:</label>
       </div>
-      <div class="col-md-3 text-primary">
+      <div class="col-md-8 text-primary">
           <p>{{$request->reason}}</p>
       </div>
   </div>
