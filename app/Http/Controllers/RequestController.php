@@ -45,7 +45,7 @@ class RequestController extends Controller
     public function update(Request $request, $leaveRequest)
     {
         $data = $request->validate([
-            'remarks' => 'string',
+            'remarks' => 'nullable',
             'status' => 'required',
         ]);
 
