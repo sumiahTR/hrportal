@@ -86,7 +86,7 @@
       </div>
       <div class="form-group">
         <label for="pan">PAN</label>
-        <input type="text" class="form-control @error('pan') is-invalid @enderror" id="pan" placeholder="PAN Number" name="pan" required="">
+        <input type="text" class="form-control @error('pan') is-invalid @enderror" id="pan" placeholder="PAN Number" name="pan">
         @error('pan')
           <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>

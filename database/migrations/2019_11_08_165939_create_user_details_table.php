@@ -21,7 +21,7 @@ class CreateUserDetailsTable extends Migration
             $table->date('dob');
             $table->string('bank', 255)->nullable();
             $table->string('account_no', 255)->nullable();
-            $table->string('pan', 255)->nullable();
+            $table->string('pan', 255)->nullable()->default(NULL);
             $table->string('designation', 255)->nullable()->default(NULL);
             $table->string('photo', 255)->nullable()->default(NULL);
             $table->text('salary_details')->nullable()->default(NULL);

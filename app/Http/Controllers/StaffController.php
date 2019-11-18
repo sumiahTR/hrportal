@@ -81,7 +81,7 @@ class StaffController extends Controller
             'dob' => 'required|max:255',
             'bank' => 'required|max:255',
             'account_no' => 'required|max:255',
-            'pan' => 'required|max:255',
+            'pan' => 'max:255',
         ]);
 
         $user = User::create($newUser);
@@ -124,7 +124,7 @@ class StaffController extends Controller
             'dob' => 'required|max:255',
             'bank' => 'required|max:255',
             'account_no' => 'required|max:255',
-            'pan' => 'required|max:255',
+            'pan' => 'max:255',
         ]);
 
         $staff->update($userData);

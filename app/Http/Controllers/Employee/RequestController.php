@@ -47,7 +47,7 @@ class RequestController extends Controller
         $newRequest = $request->validate([
             'leave_type_id'	=> 'required|integer',
             'starting_date' => 'required|date|after:today',
-            'ending_date' => 'required|date|after:starting_date',
+            'ending_date' => 'required|date|after_or_equal:starting_date',
             'reason' => 'string',
         ]);
 

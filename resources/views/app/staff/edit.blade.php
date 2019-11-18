@@ -92,7 +92,7 @@
       </div>
       <div class="form-group">
         <label for="pan">PAN</label>
-        <input type="text" class="form-control @error('pan') is-invalid @enderror" id="pan" placeholder="PAN Number" name="pan" value="@if(null !==(old('pan'))){{old('pan')}}@else{{$staff->details->pan}}@endif" required="">
+        <input type="text" class="form-control @error('pan') is-invalid @enderror" id="pan" placeholder="PAN Number" name="pan" value="@if(null !==(old('pan'))){{old('pan')}}@else{{$staff->details->pan}}@endif">
         @error('pan')
           <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
