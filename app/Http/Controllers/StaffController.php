@@ -254,7 +254,7 @@ class StaffController extends Controller
 
             Mail::to($staff)->send(new SalaryCredited($filename, $staff));
             $slip->status = 'mail sent';
-            request()->session()->flash('success', 'Salary slip mail sent to staf.');
+            request()->session()->flash('success', 'Salary slip mail sent to staff.');
             return redirect()->back();
             
             /*request()->session()->flash('warning', 'Mail not sent. Try again.');
