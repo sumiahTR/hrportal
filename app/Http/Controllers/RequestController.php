@@ -34,6 +34,27 @@ class RequestController extends Controller
         return $result;
     }
 
+    public function view($leaveRequest)
+    {
+        $request = LeaveRequest::where('id', $leaveRequest)
+                ->with('user')
+                ->first();
+        return view('app.leave.show', compact('request'));
+    }
+
+    public function update(Request $request, $leaveRequest)
+    {
+        $data = $request->validate([
+            'remarks' => 'string',
+            'status' => 'required',
+        ]);
+
+        $result = LeaveRequest::where('id', $leaveRequest)
+                ->update($data);
+
+        return redirect('/requests');
+    }
+
 
 
 }

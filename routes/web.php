@@ -36,6 +36,8 @@ Route::post('/users/change_password', 'StaffController@update_password');
 
 Route::get('/requests', 'RequestController@index')->name('requests')->middleware('can:isAdmin');
 Route::post('/requests/update', 'RequestController@updateStatus')->middleware('can:isAdmin');
+Route::get('/requests/view/{leaverequest}', 'RequestController@view')->middleware('can:isAdmin');
+Route::post('/requests/update/{leaverequest}', 'RequestController@update')->middleware('can:isAdmin');
 
 Route::get('/holidays', 'HolidayController@index');
 Route::get('/holidays/create', 'HolidayController@create')->middleware('can:isAdmin');

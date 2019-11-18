@@ -55,6 +55,7 @@
               <th>Days</th>
               <th>Leave Type</th>
               <th>Reason</th>
+              <th>Remarks</th>
               <th>Status</th>
               <th>@can('isAdmin')Change Status @endcan @can('isEmployee') Actions @endcan</th>
             </tr>
@@ -68,7 +69,9 @@
               <td>{{date('d M Y ', strtotime($request->ending_date))}}</td>
               <td>{{Carbon\Carbon::parse($request->starting_date)->diffInDays(Carbon\Carbon::parse($request->ending_date)) +1}}</td>
               <td>{{$request->leaveType->leave_type}}</td>
-              <td>{{$request->reason}}</td>
+              @can('isAdmin')<td>{{substr($request->reason, 0, 25)}}@if(strlen($request->reason)>25){{'...'}}@endif</td>@endcan
+              @can('isEmployee')<td>{{substr($request->reason, 0, 50)}}@if(strlen($request->reason)>25){{'...'}}@endif</td>@endcan
+              <td>{{$request->remarks}}</td>
               <td>
                 
                 <p class="text-@if($request->status=='pending'){{'primary'}}@elseif($request->status=='approved'){{'success'}}@else{{'danger'}} @endif">{{$request->status}}</p>
@@ -77,12 +80,15 @@
               <td>
 
                 @can('isAdmin')
-
-                  <select class=" custom-select" name="leave_type_id" onchange="updateRequestStatus(this.value, {{ $request->id }})">
+                  <form class="form-inline">
+                  <select  class="custom-select" id="inlineFormCustomSelectPref"  name="leave_type_id" onchange="updateRequestStatus(this.value, {{ $request->id }})">
                     <option value="pending" @if($request->status=='pending'){{'selected'}} @endif>pending</option>
                     <option value="approved" @if($request->status=='approved'){{'selected'}} @endif>approve</option>
                     <option value="rejected" @if($request->status=='rejected'){{'selected'}} @endif>reject</option>
                   </select>
+                  <a href="{{url('/requests/view/'.$request->id)}}" class="btn btn-outline-primary btn-sm m-1">View</a>
+                </form>
+                  
                 @endcan
                 @can('isEmployee')
                   @if( $request->starting_date >  Carbon\Carbon::today())
