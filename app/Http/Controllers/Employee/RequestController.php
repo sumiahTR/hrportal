@@ -33,7 +33,8 @@ class RequestController extends Controller
 			                ->where('requests.user_id', Auth::user()->id)
 							->where('requests.status', '!=', 'rejected')
 							//->whereDate('requests.starting_date', '<=', \Carbon\Carbon::today())
-    						->whereYear('requests.starting_date', date('Y'));
+    						->whereYear('requests.starting_date', date('Y'))
+                            ->whereNull('requests.deleted_at');
 			        })
 	    			->select((DB::raw('ifnull(SUM(requests.days), 0) as days_count, leave_type, leaves.days, leaves.id')))
 	        		->groupBy('leave_type', 'leaves.days', 'leaves.id')->orderBy('leaves.id')->get();
@@ -61,7 +62,8 @@ class RequestController extends Controller
 	                ->where('requests.user_id', Auth::user()->id)
 					->where('requests.status', '!=', 'rejected')
 					//->whereDate('requests.starting_date', '<=', \Carbon\Carbon::today())
-					->whereYear('requests.starting_date', date('Y'));
+					->whereYear('requests.starting_date', date('Y'))
+                    ->whereNull('requests.deleted_at');
 		        })
         		->where('leaves.id', $request->leave_type_id)
     			->select((DB::raw('ifnull(SUM(requests.days), 0) as days_count, leave_type, leaves.days, leaves.id')))

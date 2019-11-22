@@ -2,6 +2,23 @@
 
 @section('content')
 
+<div class="row pb-2">
+  @foreach($totalRequests as $remainingRequest)
+        <div class="col-md-4 grid-margin stretch-card">
+          <div class="card shadow">
+            <div class="card-body">
+              <p class="card-title text-md-center text-xl-left">{{$remainingRequest->leave_type}}</p>
+              <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">{{$remainingRequest->days - $remainingRequest->days_count}} of {{$remainingRequest->days}}</h3>
+                <i data-feather="calendar" class="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+              </div>  
+              <p class="mb-0 mt-2 text-danger">remaining <span class="text-black ml-1"><small></small></span></p>
+            </div>
+          </div>
+        </div>
+    @endforeach
+  </div>
+
 <div class="card shadow p-4 mb-2">
 
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 ">
