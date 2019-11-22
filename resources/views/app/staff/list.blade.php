@@ -24,7 +24,7 @@
       @endif
       <div class="table-responsive">
         <form class="form-inline" method="GET" action="" accept-charset="UTF-8">
-          <input type="text" class="form-control form-control-sm mb-2 mr-sm-2" id="inlineFormInputSearch" name="q" placeholder="search...">
+          <input type="text" class="form-control form-control-sm mb-2 mr-sm-2" id="inlineFormInputSearch" name="q" placeholder="search..." value="{{ request('q') }}">
           <button type="submit" class="btn btn-sm btn-outline-success mb-2">Search</button>
         </form>
         <table class="table table-striped table-sm">
