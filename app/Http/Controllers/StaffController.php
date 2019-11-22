@@ -27,6 +27,7 @@ class StaffController extends Controller
     {
     	$staffs = User::where('id', '!=', Auth::user()->id)
         		->where('role', 'employee')
+                ->where('name', 'like', '%'.request('q').'%')
         		->with('details')
         		->paginate(10);
         return view('app.staff.list', compact('staffs'));

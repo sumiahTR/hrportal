@@ -23,6 +23,10 @@
         </div>
       @endif
       <div class="table-responsive">
+        <form class="form-inline" method="GET" action="" accept-charset="UTF-8">
+          <input type="text" class="form-control form-control-sm mb-2 mr-sm-2" id="inlineFormInputSearch" name="q" placeholder="search...">
+          <button type="submit" class="btn btn-sm btn-outline-success mb-2">Search</button>
+        </form>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
@@ -73,7 +77,7 @@
             @endforeach
           </tbody>
         </table>
-        {{ $staffs->links() }}
+        {{ $staffs->appends(Request::except('page'))->render() }}
       </div>
     </div>
 @endsection
