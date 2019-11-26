@@ -106,6 +106,16 @@
                   <p>{{$staff->details->pan}}</p>
               </div>
           </div>
+          @foreach($totalRequests as $remainingRequest)
+            <div class="row">
+                <div class="col-md-6">
+                    <label>{{$remainingRequest->leave_type}}</label>
+                </div>
+                <div class="col-md-6 text-primary">
+                    <p>{{$remainingRequest->days - $remainingRequest->days_count}} of {{$remainingRequest->days}} remaining</p>
+                </div>
+            </div>
+          @endforeach
           <hr>
           <div class="row">
               <div class="col-md-10 text-primary">

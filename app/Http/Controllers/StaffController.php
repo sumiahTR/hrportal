@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Mail\SalaryCredited;
+use App\Leave;
 use App\SalarySlip;
 use App\User;
 use App\UserDetails;
 use Auth;
+use DB;
 use Hash;
 use PDF;
 use Illuminate\Http\Request;
@@ -103,7 +105,18 @@ class StaffController extends Controller
 
     public function show(User $staff)
     {
-        return view('app.staff.show', compact('staff'));
+        //remaining leaves count
+        $totalRequests = Leave::leftJoin('requests',function ($join) use ($staff) {
+                $join->on('leaves.id', '=', 'requests.leave_type_id')
+                    ->where('requests.user_id', $staff->id)
+                    ->where('requests.status', '!=', 'rejected')
+                    ->whereYear('requests.starting_date', date('Y'))
+                    ->whereNull('requests.deleted_at');
+                })
+                ->select((DB::raw('ifnull(SUM(requests.days), 0) as days_count, leave_type, leaves.days, leaves.id')))
+                ->groupBy('leave_type', 'leaves.days', 'leaves.id')->orderBy('leaves.id')->get();
+
+        return view('app.staff.show', compact('staff', 'totalRequests'));
     }
 
     public function edit(User $staff)
