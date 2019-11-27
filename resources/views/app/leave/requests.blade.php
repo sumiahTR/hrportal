@@ -54,7 +54,7 @@
           </select>
           <select class="custom-select custom-select-sm mb-1 mr-sm-2" name="type">
             <option value="">select leave type</option>
-            <option value="0" @if(request('type') === 0) {{'selected'}} @endif>Weekend Off</option>
+            <option value="0" @if(!(is_null(request('type'))) && request('type') == 0) {{'selected'}} @endif>Weekend Off</option>
             @foreach ($leaves as $leave)
             <option value="{{$leave->id}}" @if(request('type') == $leave->id) {{'selected'}} @endif >{{$leave->leave_type}}</option>
             @endforeach
