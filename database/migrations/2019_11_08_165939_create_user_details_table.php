@@ -25,6 +25,7 @@ class CreateUserDetailsTable extends Migration
             $table->string('designation', 255)->nullable()->default(NULL);
             $table->string('photo', 255)->nullable()->default(NULL);
             $table->text('salary_details')->nullable()->default(NULL);
+            $table->integer('weekend_off')->nullable()->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

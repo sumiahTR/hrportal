@@ -99,6 +99,15 @@
           </span>
         @enderror
       </div>
+      <div class="form-group">
+        <label for="weekend_off">Weekend Off</label>
+        <input type="Number" class="form-control @error('weekend_off') is-invalid @enderror" id="weekend_off" placeholder="Weekend off" name="weekend_off" value="@if(null !==(old('weekend_off'))){{old('weekend_off')}}@else{{$staff->details->weekend_off}}@endif">
+        @error('weekend_off')
+          <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+          </span>
+        @enderror
+      </div>
 
       <button type="submit" class="btn btn-primary">Update</button>
     </form>

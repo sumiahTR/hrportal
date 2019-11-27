@@ -3,7 +3,7 @@
 @section('content')
 <div class="row pb-2">
   @foreach($requests as $request)
-        <div class="col-md-4 grid-margin stretch-card">
+        <div class="col-md-3 grid-margin stretch-card">
           <div class="card shadow">
             <div class="card-body">
               <p class="card-title text-md-center text-xl-left">{{$request->leave_type}}</p>
@@ -16,6 +16,18 @@
           </div>
         </div>
     @endforeach
+    <div class="col-md-3 grid-margin stretch-card">
+          <div class="card shadow">
+            <div class="card-body">
+              <p class="card-title text-md-center text-xl-left">Weekend Off</p>
+              <div class="d-flex flex-wrap justify-content-between justify-content-md-center justify-content-xl-between align-items-center">
+                <h3 class="mb-0 mb-md-2 mb-xl-0 order-md-1 order-xl-0">{{$weekend_off}} of {{Auth::user()->details->weekend_off}}</h3>
+                <i data-feather="calendar" class="ti-calendar icon-md text-muted mb-0 mb-md-3 mb-xl-0"></i>
+              </div>  
+              <p class="mb-0 mt-2 text-danger">remaining <span class="text-black ml-1"><small></small></span></p>
+            </div>
+          </div>
+        </div>
   </div>
         
 <div class="card shadow p-4 mb-2">
@@ -44,6 +56,7 @@
       <div class="form-group">
         <label for="leave_type_id">Leave Type</label>
         <select class=" custom-select" name="leave_type_id">
+          <option value="0">Weekend Off</option>
           @foreach($requests as $request)
           <option value="{{$request->id}}">{{$request->leave_type}}</option>
           @endforeach
