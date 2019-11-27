@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Leave;
 use App\Request as LeaveRequest;
+use App\User;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -15,12 +16,26 @@ class RequestController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-    	$requests = LeaveRequest::latest()
-    			->with('user')
-        		->paginate(10);
-        return view('app.leave.requests', compact('requests'));
+        $query = (new LeaveRequest)->newQuery();
+        // Filter requests based on user id.
+        if ($request->filled('user')) {
+            $query->where('user_id', $request->input('user'));
+        }
+        // Filter requests based on leave type.
+        if ($request->filled('type')) {
+            $query->where('leave_type_id', $request->input('type'));
+        }
+        $requests = $query->latest()->with('user')
+                ->paginate(10);
+
+        $staffs = User::where('id', '!=', Auth::user()->id)
+                ->where('role', 'employee')
+                ->select('id', 'name')
+                ->get();
+        $leaves = Leave::all();
+        return view('app.leave.requests', compact('requests', 'staffs', 'leaves'));
     }
 
     public function updateStatus(Request $request)

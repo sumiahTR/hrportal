@@ -45,6 +45,22 @@
         </div>
       @endif
       <div class="table-responsive">
+        <form class="form-inline" method="GET" action="" accept-charset="UTF-8">
+          <select class="custom-select custom-select-sm mb-1 mr-sm-2" name="user">
+            <option value="">select user</option>
+            @foreach ($staffs as $staff)
+            <option value="{{$staff->id}}" @if(request('user') == $staff->id) {{'selected'}} @endif >{{$staff->name}}</option>
+            @endforeach
+          </select>
+          <select class="custom-select custom-select-sm mb-1 mr-sm-2" name="type">
+            <option value="">select leave type</option>
+            <option value="0" @if(request('type') === 0) {{'selected'}} @endif>Weekend Off</option>
+            @foreach ($leaves as $leave)
+            <option value="{{$leave->id}}" @if(request('type') == $leave->id) {{'selected'}} @endif >{{$leave->leave_type}}</option>
+            @endforeach
+          </select>
+          <button type="submit" class="btn btn-sm btn-outline-success mb-1">Filter</button>
+        </form>
         <table class="table table-striped table-sm">
           <thead>
             <tr>
