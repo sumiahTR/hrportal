@@ -69,6 +69,15 @@
 
       <div class="form-row">
         <div class="col-md-12">
+          <label for="inputEmail4">Message</label>
+        </div>
+        <div class="col-7">
+          <textarea name="salary[message]" class="form-control">@isset($staff->details->salary_details->message) {{$staff->details->salary_details->message}}@endif</textarea>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-12">
           <label for="inputEmail4">Salary Date (y-m-d)</label>
         </div>
         <div class="col-7">

@@ -5,6 +5,7 @@ return [
 
     'salary' => [
             'slip' => 'tiding',
+            'message' => 'This month salary has been credited to your account. Please check attached salary slip for details.',
             'salary_date' => date('Y-m-d'),
             'income' => [
                 'basic' => [

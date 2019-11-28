@@ -270,7 +270,7 @@ class StaffController extends Controller
                 'status' => 'slip generated'
             ]);
 
-            Mail::to($staff)->send(new SalaryCredited($filename, $staff));
+            Mail::to($staff)->send(new SalaryCredited($filename, $staff, $staff->details->salary_details->message));
             $slip->status = 'mail sent';
             request()->session()->flash('success', 'Salary slip mail sent to staff.');
             return redirect()->back();

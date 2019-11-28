@@ -20,11 +20,13 @@ class SalaryCredited extends Mailable
 
     protected $filename;
     protected $staff;
+    protected $mailBody;
 
-    public function __construct($filename, User $staff)
+    public function __construct($filename, User $staff, $mailBody)
     {
         $this->filename = $filename;
         $this->staff = $staff;
+        $this->mailBody = $mailBody;
     }
 
     /**
@@ -39,6 +41,7 @@ class SalaryCredited extends Mailable
                 ->attachFromStorage($this->filename)
                 ->with([
                     'name' => $this->staff->name,
+                    'mailBody' => $this->mailBody,
                 ]);
     }
 }
