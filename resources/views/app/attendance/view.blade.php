@@ -19,7 +19,12 @@
           </ul>
         </div>
       @endif
+      @can('isEmployee')
         <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRmK2PkLZXAiD8foO0MGs8gLmie5TYMgQR4iNOUxvt_27dDpjGrZ6NvJFu6GgNkxhsdWcTtjFgYlPFH/pubhtml?widget=true&amp;headers=True&amp;chrome=True" height="400px"></iframe>
+        @endcan
+        @can('isAdmin')
+        <iframe src="https://docs.google.com/spreadsheets/d/1ZfbsHMf0KI5LiubyMwRe46PogJXqGcew045w-F2E8h8/edit#gid=0" height="450px"></iframe>
+        @endcan
 
     </div>
 @endsection
