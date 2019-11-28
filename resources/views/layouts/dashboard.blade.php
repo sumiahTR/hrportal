@@ -218,7 +218,7 @@
                 </li>-->
                 @endcan
                 <li class="nav-item">
-                  <a class="nav-link" href="/attendance">
+                  <a class="nav-link" href="/shift">
                     <span data-feather="bar-chart-2"></span>
                     Attendance
                   </a>
@@ -301,7 +301,7 @@
                 </li>-->
                 @endcan
                 <li class="nav-item">
-                  <a class="nav-link" href="/attendance">
+                  <a class="nav-link" href="/shift">
                     <span data-feather="bar-chart-2"></span>
                     Attendance
                   </a>
