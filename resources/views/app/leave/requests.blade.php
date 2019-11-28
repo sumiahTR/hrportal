@@ -45,6 +45,7 @@
         </div>
       @endif
       <div class="table-responsive">
+        @can('isAdmin')
         <form class="form-inline" method="GET" action="" accept-charset="UTF-8">
           <select class="custom-select custom-select-sm mb-1 mr-sm-2" name="user">
             <option value="">select user</option>
@@ -61,6 +62,7 @@
           </select>
           <button type="submit" class="btn btn-sm btn-outline-success mb-1">Filter</button>
         </form>
+        @endcan
         <table class="table table-striped table-sm">
           <thead>
             <tr>
@@ -122,7 +124,7 @@
             @endforeach
           </tbody>
         </table>
-        {{ $requests->links() }}
+        {{ $requests->appends(Request::except('page'))->render() }}
       </div>
     </div>
     <div id="loading-overlay">
