@@ -182,12 +182,7 @@
                     Holidays
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/attendance">
-                    <span data-feather="bar-chart-2"></span>
-                    Attendance
-                  </a>
-                </li>
+                
                 <!--<li class="nav-item">
                   <a class="nav-link" href="#">
                     <span data-feather="dollar-sign"></span>
@@ -222,6 +217,12 @@
                   </a>
                 </li>-->
                 @endcan
+                <li class="nav-item">
+                  <a class="nav-link" href="/attendance">
+                    <span data-feather="bar-chart-2"></span>
+                    Attendance
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -264,12 +265,7 @@
                     Holidays
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/attendance">
-                    <span data-feather="bar-chart-2"></span>
-                    Attendance
-                  </a>
-                </li>
+
                 <!--<li class="nav-item">
                   <a class="nav-link" href="#">
                     <span data-feather="dollar-sign"></span>
@@ -304,6 +300,12 @@
                   </a>
                 </li>-->
                 @endcan
+                <li class="nav-item">
+                  <a class="nav-link" href="/attendance">
+                    <span data-feather="bar-chart-2"></span>
+                    Attendance
+                  </a>
+                </li>
               </ul>
 
             </div>
