@@ -19,7 +19,7 @@
           </ul>
         </div>
       @endif
-        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRmK2PkLZXAiD8foO0MGs8gLmie5TYMgQR4iNOUxvt_27dDpjGrZ6NvJFu6GgNkxhsdWcTtjFgYlPFH/pubhtml?widget=true&amp;headers=True&amp;chrome=True" style="height: -webkit-fill-available;"></iframe>
+        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRmK2PkLZXAiD8foO0MGs8gLmie5TYMgQR4iNOUxvt_27dDpjGrZ6NvJFu6GgNkxhsdWcTtjFgYlPFH/pubhtml?widget=true&amp;headers=True&amp;chrome=True" height="400px"></iframe>
 
     </div>
 @endsection
