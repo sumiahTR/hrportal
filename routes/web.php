@@ -49,6 +49,8 @@ Route::post('/holidays/update/{holiday}', 'HolidayController@update')->middlewar
 Route::get('/leaves', 'LeaveController@index')->middleware('can:isAdmin');
 Route::post('/leaves/update', 'LeaveController@update')->middleware('can:isAdmin');
 
+Route::get('/attendance', 'AttendanceController@index')->middleware('can:isAdmin');
+
 
 //<<<<<<<<<<<Employee Section>>>>>>>>>>>>>>>>>>>>>>
 
