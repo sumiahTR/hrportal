@@ -60,6 +60,14 @@
           </div>
           <div class="row">
               <div class="col-md-6">
+                  <label>Mobile</label>
+              </div>
+              <div class="col-md-6 text-primary">
+                  <p>{{$staff->details->mobile}}</p>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
                   <label>Designation</label>
               </div>
               <div class="col-md-6 text-primary">

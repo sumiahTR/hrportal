@@ -17,6 +17,7 @@ class CreateUserDetailsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->bigInteger('employee_no');
+            $table->string('mobile', 255)->nullable()->default(NULL);
             $table->date('joining_date');
             $table->date('dob');
             $table->string('bank', 255)->nullable();

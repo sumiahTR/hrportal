@@ -81,6 +81,7 @@ class StaffController extends Controller
         $userDetails = $request->validate([
             'designation' => 'required|max:255',
             'employee_no' => 'nullable',
+            'mobile' => 'nullable',
             'joining_date' => 'required|max:255',
             'dob' => 'required|max:255',
             'bank' => 'required|max:255',
@@ -137,6 +138,7 @@ class StaffController extends Controller
         $userDetails = $request->validate([
             'designation' => 'required|max:255',
             'employee_no' => 'nullable',
+            'mobile' => 'nullable',
             'joining_date' => 'required|max:255',
             'dob' => 'required|max:255',
             'bank' => 'required|max:255',

@@ -14,7 +14,7 @@
 
       <div class="form-group">
         <label for="title">Name</label>
-        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name" name="name" required="">
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name" name="name" required="" value="{{old('name')}}">
         @error('name')
           <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
@@ -23,7 +23,7 @@
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email" name="email" required="">
+        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email" name="email" required="" value="{{old('email')}}">
         @error('email')
           <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
@@ -32,8 +32,17 @@
       </div>
       <div class="form-group">
         <label for="employee_no">Emplyee Number</label>
-        <input type="text" class="form-control @error('employee_no') is-invalid @enderror" id="employee_no" placeholder="Emplyee Number" name="employee_no" required="">
+        <input type="text" class="form-control @error('employee_no') is-invalid @enderror" id="employee_no" placeholder="Emplyee Number" name="employee_no" required="" value="{{old('employee_no')}}">
         @error('employee_no')
+          <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+          </span>
+        @enderror
+      </div>
+      <div class="form-group">
+        <label for="mobile">Mobile Number</label>
+        <input type="text" class="form-control @error('mobile') is-invalid @enderror" id="mobile" placeholder="Mobile Number" name="mobile" value="{{old('mobile')}}">
+        @error('mobile')
           <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
           </span>
@@ -59,7 +68,7 @@
       </div>
       <div class="form-group">
         <label for="designation">Designation</label>
-        <input type="text" class="form-control @error('designation') is-invalid @enderror" id="designation" placeholder="Designation" name="designation" required="">
+        <input type="text" class="form-control @error('designation') is-invalid @enderror" id="designation" placeholder="Designation" name="designation" required="" value="{{old('designation')}}">
         @error('designation')
           <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
@@ -68,7 +77,7 @@
       </div>
       <div class="form-group">
         <label for="bank">Bank</label>
-        <input type="text" class="form-control @error('bank') is-invalid @enderror" id="bank" placeholder="Bank" name="bank" required="">
+        <input type="text" class="form-control @error('bank') is-invalid @enderror" id="bank" placeholder="Bank" name="bank" required="" value="{{old('bank')}}">
         @error('bank')
           <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
@@ -77,7 +86,7 @@
       </div>
       <div class="form-group">
         <label for="account_no">Bank Account Number</label>
-        <input type="text" class="form-control @error('account_no') is-invalid @enderror" id="account_no" placeholder="Account Number" name="account_no" required="">
+        <input type="text" class="form-control @error('account_no') is-invalid @enderror" id="account_no" placeholder="Account Number" name="account_no" required="" value="{{old('account_no')}}">
         @error('account_no')
           <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
@@ -86,7 +95,7 @@
       </div>
       <div class="form-group">
         <label for="pan">PAN</label>
-        <input type="text" class="form-control @error('pan') is-invalid @enderror" id="pan" placeholder="PAN Number" name="pan">
+        <input type="text" class="form-control @error('pan') is-invalid @enderror" id="pan" placeholder="PAN Number" name="pan" value="{{old('pan')}}">
         @error('pan')
           <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>

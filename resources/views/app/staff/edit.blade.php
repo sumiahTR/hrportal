@@ -46,6 +46,15 @@
         @enderror
       </div>
       <div class="form-group">
+        <label for="mobile">Mobile Number</label>
+        <input type="text" class="form-control @error('mobile') is-invalid @enderror" id="mobile" placeholder="Mobile Number" name="mobile" value="@if(null !==(old('mobile'))){{old('mobile')}}@else{{$staff->details->mobile}}@endif">
+        @error('mobile')
+          <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+          </span>
+        @enderror
+      </div>
+      <div class="form-group">
         <label for="joining_date">Joining Date</label>
         <input type="date" class="form-control @error('joining_date') is-invalid @enderror" id="joining_date" placeholder="Joining Date" name="joining_date" value="@if(null !==(old('joining_date'))){{old('joining_date')}}@else{{$staff->details->joining_date}}@endif" required="">
         @error('joining_date')

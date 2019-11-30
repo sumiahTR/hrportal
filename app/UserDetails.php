@@ -10,7 +10,7 @@ class UserDetails extends Model
 	use SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'employee_no', 'joining_date', 'dob', 'bank', 'account_no', 'pan', 'designation', 'salary_details', 'weekend_off' 
+        'user_id', 'employee_no', 'mobile', 'joining_date', 'dob', 'bank', 'account_no', 'pan', 'designation', 'salary_details', 'weekend_off' 
     ];
 
     /*public function details()
