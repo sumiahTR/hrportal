@@ -29,6 +29,11 @@ class Request extends Model
         ]);
     }
 
+    public function updatedby()
+    {
+        return $this->hasOne('App\User', 'id', 'updated_by')->withDefault();
+    }
+
     /*public function setUserIdAttribute($value)
     {
         $this->attributes['user_id'] = Auth::user()->id;

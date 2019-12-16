@@ -28,6 +28,7 @@ class RequestController extends Controller
             $query->where('leave_type_id', $request->input('type'));
         }
         $requests = $query->latest()->with('user')
+                ->with('updatedby')
                 ->paginate(10);
 
         $staffs = User::where('id', '!=', Auth::user()->id)
@@ -46,7 +47,10 @@ class RequestController extends Controller
         ]);
 
         $result = LeaveRequest::where('id', $request->id)
-                ->update([ 'status' => $request->leaveStatus ]);
+                ->update([ 
+                    'status' => $request->leaveStatus,
+                    'updated_by' =>  Auth::user()->id
+                ]);
 
         return $result;
     }
@@ -75,6 +79,8 @@ class RequestController extends Controller
             'remarks' => 'nullable',
             'status' => 'required',
         ]);
+
+        $data['updated_by'] = Auth::user()->id;
 
         $result = LeaveRequest::where('id', $leaveRequest)
                 ->update($data);

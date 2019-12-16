@@ -45,7 +45,7 @@
         </div>
       @endif
       <div class="table-responsive">
-        @can('isLeaveAdmin')
+        @can('isAdmin')
         <form class="form-inline" method="GET" action="" accept-charset="UTF-8">
           <select class="custom-select custom-select-sm mb-1 mr-sm-2" name="user">
             <option value="">select user</option>
@@ -67,7 +67,7 @@
           <thead>
             <tr>
               <th>#</th>
-              @can('isLeaveAdmin')<th>Staff</th>@endcan
+              @can('isAdmin')<th>Staff</th>@endcan
               <th>From</th>
               <th>To</th>
               <th>Days</th>
@@ -75,31 +75,29 @@
               <th>Reason</th>
               <th>Remarks</th>
               <th>Status</th>
-              @can('isLeaveAdmin')<th>UpdatedBy</th>@endcan
-              <th>@can('isLeaveAdmin')Change Status @elsecan('isEmployee') Actions @endcan</th>
+              <th>@can('isAdmin')Change Status @endcan @can('isEmployee') Actions @endcan</th>
             </tr>
           </thead>
           <tbody>
             @foreach($requests as $key => $request)
             <tr>
               <td>{{ $requests->firstItem() + $key }}</td>
-              @can('isLeaveAdmin')<td>{{$request->user->name}}</td>@endcan
+              @can('isAdmin')<td>{{$request->user->name}}</td>@endcan
               <td>{{date('d M Y ', strtotime($request->starting_date))}}</td>
               <td>{{date('d M Y ', strtotime($request->ending_date))}}</td>
               <td>{{Carbon\Carbon::parse($request->starting_date)->diffInDays(Carbon\Carbon::parse($request->ending_date)) +1}}</td>
               <td>{{$request->leaveType->leave_type}}</td>
-              @can('isLeaveAdmin')<td>{{substr($request->reason, 0, 25)}}@if(strlen($request->reason)>25){{'...'}}@endif</td>
-              @elsecan('isEmployee')<td>{{substr($request->reason, 0, 50)}}@if(strlen($request->reason)>25){{'...'}}@endif</td>@endcan
+              @can('isAdmin')<td>{{substr($request->reason, 0, 25)}}@if(strlen($request->reason)>25){{'...'}}@endif</td>@endcan
+              @can('isEmployee')<td>{{substr($request->reason, 0, 50)}}@if(strlen($request->reason)>25){{'...'}}@endif</td>@endcan
               <td>{{$request->remarks}}</td>
               <td>
                 
                 <p class="text-@if($request->status=='pending'){{'primary'}}@elseif($request->status=='approved'){{'success'}}@else{{'danger'}} @endif">{{$request->status}}</p>
 
               </td>
-              @can('isLeaveAdmin')<td>{{$request->updatedby->name}}</td>@endcan
               <td>
 
-                @can('isLeaveAdmin')
+                @can('isAdmin')
                   <form class="form-inline">
                   <select  class="custom-select" id="inlineFormCustomSelectPref"  name="leave_type_id" onchange="updateRequestStatus(this.value, {{ $request->id }})">
                     <option value="pending" @if($request->status=='pending'){{'selected'}} @endif>pending</option>
@@ -109,7 +107,8 @@
                   <a href="{{url('/requests/view/'.$request->id)}}" class="btn btn-outline-primary btn-sm m-1">View</a>
                 </form>
                   
-                @elsecan('isEmployee')
+                @endcan
+                @can('isEmployee')
                   @if( $request->starting_date >  Carbon\Carbon::today())
                     <form method="POST" action="{{ route('requests.destroy', $request) }}" accept-charset="UTF-8" onsubmit="return confirm(&quot;Are you sure to delete this?&quot;)"  style="display: inline;">
                       {{ csrf_field() }} {{ method_field('delete') }}

@@ -22,7 +22,7 @@ class RequestController extends Controller
     			->with('leaveType')
                 ->latest()
         		->paginate(10);
-        return view('app.leave.requests', compact('requests'));
+        return view('app.leave.employee_requests', compact('requests'));
     }
 
     public function create()
@@ -61,7 +61,7 @@ class RequestController extends Controller
         if ($request->leave_type_id == 0) {
             //weekend off
             //get all weekend off this year
-            $oldRequests = LeaveRequest::where('leave_type_id', 0)
+            /*$oldRequests = LeaveRequest::where('leave_type_id', 0)
                     ->where('user_id', Auth::user()->id)
                     ->where('status', '!=', 'rejected')
                     ->whereYear('starting_date', date('Y'))
@@ -71,7 +71,7 @@ class RequestController extends Controller
             if( ($oldRequests > Auth::user()->details->weekend_off) || (($oldRequests+$noOfLeaves) > Auth::user()->details->weekend_off) ) {
                 request()->session()->flash('warning', 'Remaining weekend offs is not sufficent');
                 return redirect()->back();
-            }
+            }*/
 
         }
         else {

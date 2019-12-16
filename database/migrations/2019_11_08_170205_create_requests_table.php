@@ -23,6 +23,7 @@ class CreateRequestsTable extends Migration
             $table->text('reason')->nullable();
             $table->text('remarks')->nullable();
             $table->string('status')->default('pending');
+            $table->bigInteger('updated_by')->nullable()->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
