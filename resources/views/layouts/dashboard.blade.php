@@ -216,7 +216,6 @@
                     Salary Report
                   </a>
                 </li>-->
-                @endcan
                 @can('isLeaveAdmin')
                 <li class="nav-item">
                   <a class="nav-link" href="/requests">
@@ -225,6 +224,8 @@
                   </a>
                 </li>
                 @endcan
+                @endcan
+                
                 <li class="nav-item">
                   <a class="nav-link" href="/shift">
                     <span data-feather="bar-chart-2"></span>
@@ -307,7 +308,6 @@
                     Salary Report
                   </a>
                 </li>-->
-                @endcan
                 @can('isLeaveAdmin')
                 <li class="nav-item">
                   <a class="nav-link" href="/requests">
@@ -316,6 +316,8 @@
                   </a>
                 </li>
                 @endcan
+                @endcan
+
                 <li class="nav-item">
                   <a class="nav-link" href="/shift">
                     <span data-feather="bar-chart-2"></span>
