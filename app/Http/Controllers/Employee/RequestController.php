@@ -39,8 +39,9 @@ class RequestController extends Controller
     			->select((DB::raw('ifnull(SUM(requests.days), 0) as days_count, leave_type, leaves.days, leaves.id')))
         		->groupBy('leave_type', 'leaves.days', 'leaves.id')->orderBy('leaves.id')->get();
         $weekend_off = LeaveRequest::usedWeekendOffCount();
+        $earn_leave = LeaveRequest::usedEarnLeaveCount();
 
-        return view('app.leave.create', compact('requests', 'weekend_off'));
+        return view('app.leave.create', compact('requests', 'weekend_off', 'earn_leave'));
     }
 
     public function store(Request $request)
@@ -73,6 +74,29 @@ class RequestController extends Controller
                 return redirect()->back();
             }*/
 
+        }
+        elseif ($request->leave_type_id == 5) {
+            $oldRequests = LeaveRequest::where('leave_type_id', 5)
+                    ->where('user_id', Auth::user()->id)
+                    ->where('status', '!=', 'rejected')
+                    ->whereYear('starting_date', date('Y'))
+                    ->whereNull('deleted_at')
+                    ->sum('days');
+
+            if( ($oldRequests > Auth::user()->details->earn_leave) || (($oldRequests+$noOfLeaves) > Auth::user()->details->earn_leave) ) {
+                request()->session()->flash('warning', 'Remaining earn leaves is not sufficent');
+                return redirect()->back();
+            }
+
+            if($request->leave_type_id == 5) {
+                $joiningDate = \App\UserDetails::where('user_id', Auth::user()->id)
+                        ->first('joining_date');
+
+                if(!(\Carbon\Carbon::parse($joiningDate->joining_date)->diffInDays(\Carbon\Carbon::parse($request->starting_date)) > 730)) {
+                    request()->session()->flash('warning', 'Earn Leave is only applicable to those who complete atleast two years of service.');
+                    return redirect()->back();
+                }
+            }
         }
         else {
 

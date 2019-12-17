@@ -117,6 +117,15 @@
           </span>
         @enderror
       </div>
+      <div class="form-group">
+        <label for="earn_leave">Earn Leave</label>
+        <input type="Number" class="form-control @error('earn_leave') is-invalid @enderror" id="earn_leave" placeholder="Weekend off" name="earn_leave" value="@if(null !==(old('earn_leave'))){{old('earn_leave')}}@else{{$staff->details->earn_leave}}@endif">
+        @error('earn_leave')
+          <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+          </span>
+        @enderror
+      </div>
 
       <button type="submit" class="btn btn-primary">Update</button>
     </form>

@@ -88,6 +88,7 @@ class StaffController extends Controller
             'account_no' => 'required|max:255',
             'pan' => 'max:255',
             'weekend_off' => 'nullable|integer',
+            'earn_leave' => 'nullable|integer',
         ]);
 
         $user = User::create($newUser);
@@ -119,8 +120,9 @@ class StaffController extends Controller
                 ->select((DB::raw('ifnull(SUM(requests.days), 0) as days_count, leave_type, leaves.days, leaves.id')))
                 ->groupBy('leave_type', 'leaves.days', 'leaves.id')->orderBy('leaves.id')->get();
         $weekend_off = LeaveRequest::usedWeekendOffCount($staff->id);
+        $earn_leave = LeaveRequest::usedEarnLeaveCount($staff->id);
 
-        return view('app.staff.show', compact('staff', 'totalRequests', 'weekend_off'));
+        return view('app.staff.show', compact('staff', 'totalRequests', 'weekend_off', 'earn_leave'));
     }
 
     public function edit(User $staff)
@@ -145,6 +147,7 @@ class StaffController extends Controller
             'account_no' => 'required|max:255',
             'pan' => 'max:255',
             'weekend_off' => 'nullable|integer',
+            'earn_leave' => 'nullable|integer',
         ]);
 
         $staff->update($userData);

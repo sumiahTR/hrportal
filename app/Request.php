@@ -24,9 +24,14 @@ class Request extends Model
 
     public function leaveType()
     {
-        return $this->hasOne('App\Leave', 'id', 'leave_type_id')->withDefault([
-            'leave_type' => 'Weekend Off',
-        ]);
+        return $this->hasOne('App\Leave', 'id', 'leave_type_id')->withDefault(function ($leaveType, $request) {
+            if($request->leave_type_id == 5) {
+                $leaveType->leave_type = 'Earn Leave';
+            }
+            else {
+                $leaveType->leave_type = 'Weekend Off';
+            }
+        });
     }
 
     public function updatedby()
@@ -54,6 +59,20 @@ class Request extends Model
         }
 
         return DB::table('requests')->where('leave_type_id', 0)
+                ->where('user_id', $id)
+                ->where('status', '!=', 'rejected')
+                ->whereYear('starting_date', date('Y'))
+                ->whereNull('deleted_at')
+                ->sum('days');
+    }
+
+    //Earn leave type id is 5 @hard coded
+    public static function usedEarnLeaveCount($id = null) {
+        if(is_null($id)) {
+            $id = Auth::user()->id;
+        }
+
+        return DB::table('requests')->where('leave_type_id', 5)
                 ->where('user_id', $id)
                 ->where('status', '!=', 'rejected')
                 ->whereYear('starting_date', date('Y'))

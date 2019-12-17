@@ -70,7 +70,8 @@ class RequestController extends Controller
                 ->select((DB::raw('ifnull(SUM(requests.days), 0) as days_count, leave_type, leaves.days, leaves.id')))
                 ->groupBy('leave_type', 'leaves.days', 'leaves.id')->orderBy('leaves.id')->get();
         $weekend_off = LeaveRequest::usedWeekendOffCount($request->user->id);
-        return view('app.leave.show', compact('request', 'totalRequests', 'weekend_off'));
+        $earn_leave = LeaveRequest::usedEarnLeaveCount($request->user->id);
+        return view('app.leave.show', compact('request', 'totalRequests', 'weekend_off', 'earn_leave'));
     }
 
     public function update(Request $request, $leaveRequest)

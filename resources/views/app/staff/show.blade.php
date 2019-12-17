@@ -132,6 +132,14 @@
                   <p>{{$staff->details->weekend_off - $weekend_off}} of {{$staff->details->weekend_off}} remaining</p>
               </div>
           </div>
+          <div class="row">
+              <div class="col-md-6">
+                  <label>Earn Leave</label>
+              </div>
+              <div class="col-md-6 text-primary">
+                  <p>{{$staff->details->earn_leave - $earn_leave}} of {{$staff->details->earn_leave}} remaining</p>
+              </div>
+          </div>
           <hr>
           <div class="row">
               <div class="col-md-10 text-primary">
