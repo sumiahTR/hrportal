@@ -165,14 +165,14 @@
         ?>
       </div>
 
-      <div class="form-group">
+      <!--<div class="form-group">
         <label for="starting_date">Status</label>
         <select  class="custom-select" id=""  name="status" >
           <option value="pending" @if($request->status=='pending'){{'selected'}} @endif>pending</option>
           <option value="approved" @if($request->status=='approved'){{'selected'}} @endif>approve</option>
           <option value="rejected" @if($request->status=='rejected'){{'selected'}} @endif>reject</option>
         </select>
-      </div>
+      </div>-->
 
 
       <div class="form-group">

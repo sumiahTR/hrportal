@@ -102,7 +102,7 @@ class RequestController extends Controller
                     ->whereYear('requests.starting_date', date('Y'))
                     ->whereNull('requests.deleted_at');
                 })
-                ->select((DB::raw('ifnull(SUM(requests.days), 0) as days_count, leave_type, leaves.days, leaves.id')))
+                ->select((DB::raw('ifnull(SUM("requests.num_of_daysapproved","requests.num_of_daysapproved","requests.days"), 0) as days_count, leave_type, leaves.days, leaves.id')))
                 ->groupBy('leave_type', 'leaves.days', 'leaves.id')->orderBy('leaves.id')->get();
         $weekend_off = LeaveRequest::usedWeekendOffCount($request->user->id);
         $earn_leave = LeaveRequest::usedEarnLeaveCount($request->user->id);
@@ -114,7 +114,7 @@ class RequestController extends Controller
 
         $data = $request->validate([
             'remarks' => 'nullable',
-            'status' => 'required',
+            //'status' => 'required',
         ]);
 
         $data['updated_by'] = Auth::user()->id;
@@ -123,20 +123,28 @@ class RequestController extends Controller
         $data['num_of_daysapproved'] = $countof_approve;
         $days = '';
         $i = 0;
-        foreach($approved_days as $a =>$s)
+        if($countof_approve>0)
         {
-            $i = ++$i;
-            $days.=$s;
-            if($i<$countof_approve)
-            {
-                $days.=',';
-            }
-        }
+	        foreach($approved_days as $a =>$s)
+	        {
+	            $i = ++$i;
+	            $days.=$s;
+	            if($i<$countof_approve)
+	            {
+	                $days.=',';
+	            }
+	        }
+	        $data['status'] = 'approved';
+	    }
+	    else
+	    {
+	    	$data['status'] = 'rejected';
+	    }
         $data['days_approved'] = $days;
         $result = LeaveRequest::where('id', $leaveRequest)
                 ->update($data);
 
-        //return redirect('/requests');
+        return redirect('/requests');
     }
 
 

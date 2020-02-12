@@ -151,7 +151,7 @@
             $("#loading-overlay").show();
         },
             success:function(result){
-              alert(result);
+              //alert(result);
               $("#loading-overlay").hide();
 
               location.reload();

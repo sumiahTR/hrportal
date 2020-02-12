@@ -73,6 +73,8 @@
               <th>Days</th>
               <th>Leave Type</th>
               <th>Reason</th>
+              <th>No:of Days Approved</th>
+              <th>Dates Approved</th>
               <th>Remarks</th>
               <th>Status</th>
               <th>@can('isAdmin')Change Status @endcan @can('isEmployee') Actions @endcan</th>
@@ -80,6 +82,28 @@
           </thead>
           <tbody>
             @foreach($requests as $key => $request)
+            <?php
+             $days = '';
+              if($request->days_approved == '')
+              { 
+                $n = 0;
+                $starting_date = $request->starting_date;
+                $ending_date = $request->ending_date;
+                for($i = $starting_date;$i <= $ending_date;$i++)
+                {
+                    $n = ++$n;
+                    $days.=$i;
+                    if($i != $ending_date)
+                    {
+                        $days.='<br>';
+                    }
+                }
+              }
+              else
+              {
+                $days = str_replace(',','<br>',$request->days_approved);
+              }
+            ?>
             <tr>
               <td>{{ $requests->firstItem() + $key }}</td>
               @can('isAdmin')<td>{{$request->user->name}}</td>@endcan
@@ -89,6 +113,8 @@
               <td>{{$request->leaveType->leave_type}}</td>
               @can('isAdmin')<td>{{substr($request->reason, 0, 25)}}@if(strlen($request->reason)>25){{'...'}}@endif</td>@endcan
               @can('isEmployee')<td>{{substr($request->reason, 0, 50)}}@if(strlen($request->reason)>25){{'...'}}@endif</td>@endcan
+              <td>@if($request->num_of_daysapproved != '') {{$request->num_of_daysapproved}} @else {{$request->days}}@endif</td>
+              <td>{!!$days!!}</td>
               <td>{{$request->remarks}}</td>
               <td>
                 

@@ -63,7 +63,7 @@ class Request extends Model
                 ->where('status', '!=', 'rejected')
                 ->whereYear('starting_date', date('Y'))
                 ->whereNull('deleted_at')
-                ->sum('days');
+                ->sum('num_of_daysapproved','num_of_daysapproved','days');
     }
 
     //Earn leave type id is 5 @hard coded
@@ -77,6 +77,7 @@ class Request extends Model
                 ->where('status', '!=', 'rejected')
                 ->whereYear('starting_date', date('Y'))
                 ->whereNull('deleted_at')
-                ->sum('days');
+                ->sum('num_of_daysapproved','num_of_daysapproved','days');
+               // ->sum('days');
     }
 }
