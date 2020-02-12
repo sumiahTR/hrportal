@@ -74,6 +74,7 @@
               <th>Leave Type</th>
               <th>Reason</th>
               <th>Remarks</th>
+              <th>Days Approved</th>
               <th>Status</th>
               @can('isLeaveAdmin')<th>UpdatedBy</th>@endcan
               <th>@can('isLeaveAdmin')Change Status @elsecan('isEmployee') Actions @endcan</th>
@@ -91,6 +92,7 @@
               @can('isLeaveAdmin')<td>{{substr($request->reason, 0, 25)}}@if(strlen($request->reason)>25){{'...'}}@endif</td>
               @elsecan('isEmployee')<td>{{substr($request->reason, 0, 50)}}@if(strlen($request->reason)>25){{'...'}}@endif</td>@endcan
               <td>{{$request->remarks}}</td>
+              <td>@if($request->num_of_daysapproved == '' || $request->num_of_daysapproved == $request->days) {{$request->days}} @else {{$request->num_of_daysapproved}} @endif </td>
               <td>
                 
                 <p class="text-@if($request->status=='pending'){{'primary'}}@elseif($request->status=='approved'){{'success'}}@else{{'danger'}} @endif">{{$request->status}}</p>
@@ -149,6 +151,7 @@
             $("#loading-overlay").show();
         },
             success:function(result){
+              alert(result);
               $("#loading-overlay").hide();
 
               location.reload();

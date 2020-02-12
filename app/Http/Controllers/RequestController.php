@@ -41,13 +41,48 @@ class RequestController extends Controller
 
     public function updateStatus(Request $request)
     {
+        
         $request->validate([
             'id' => 'required',
             'leaveStatus' => 'required',
         ]);
 
+        if($request->leaveStatus =='rejected')
+        {
+            $num_of_daysapproved = 0;
+            $days_approved = '';
+        }
+        else if($request->leaveStatus =='approved')
+        {
+            $current = LeaveRequest::where('id', $request->id)
+                        ->select('days','starting_date','ending_date')
+                        ->first();
+            $num_of_daysapproved = $current->days;
+            $starting_date = $current->starting_date;
+            $ending_date = $current->ending_date;
+            $days = '';
+            $n = 0;
+            
+            for($i = $starting_date;$i <= $ending_date;$i++)
+            {
+                $n = ++$n;
+                $days.=$i;
+                if($n<$num_of_daysapproved)
+                {
+                    $days.=',';
+                }
+            }
+            $days_approved =  $days;
+        }
+        else if($request->leaveStatus =='pending')
+        {
+            $num_of_daysapproved = '';
+            $days_approved = '';
+        }
         $result = LeaveRequest::where('id', $request->id)
                 ->update([ 
+                    'num_of_daysapproved' => $num_of_daysapproved,
+                    'days_approved' => $days_approved,
                     'status' => $request->leaveStatus,
                     'updated_by' =>  Auth::user()->id
                 ]);
@@ -76,17 +111,32 @@ class RequestController extends Controller
 
     public function update(Request $request, $leaveRequest)
     {
+
         $data = $request->validate([
             'remarks' => 'nullable',
             'status' => 'required',
         ]);
 
         $data['updated_by'] = Auth::user()->id;
-
+        $approved_days = $request->leave_date;
+        $countof_approve = count($approved_days);
+        $data['num_of_daysapproved'] = $countof_approve;
+        $days = '';
+        $i = 0;
+        foreach($approved_days as $a =>$s)
+        {
+            $i = ++$i;
+            $days.=$s;
+            if($i<$countof_approve)
+            {
+                $days.=',';
+            }
+        }
+        $data['days_approved'] = $days;
         $result = LeaveRequest::where('id', $leaveRequest)
                 ->update($data);
 
-        return redirect('/requests');
+        //return redirect('/requests');
     }
 
 

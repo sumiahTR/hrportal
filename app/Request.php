@@ -12,7 +12,7 @@ class Request extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'starting_date', 'ending_date', 'reason', 'remarks', 'status', 'leave_type_id', 'days',
+        'user_id', 'starting_date', 'ending_date', 'reason', 'remarks', 'status', 'leave_type_id', 'days','num_of_daysapproved','days_approved'
     ];
 
 

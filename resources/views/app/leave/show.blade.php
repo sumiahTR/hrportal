@@ -125,6 +125,45 @@
     <form method="POST" action="{{ url('/requests/update/'.$request->id) }}" accept-charset="UTF-8" enctype="multipart/form-data" class="pb-2">
       {{ csrf_field() }}
 
+      <div class="form-group">
+        <label for="dates">Dates</label>
+        <?php
+        $starting_date = $request->starting_date;
+        $ending_date = $request->ending_date;
+        //$starting_date = '2020-04-06';
+        //$ending_date = '2020-04-09';
+        $flag = 0;
+        
+        if($request->status=='pending')
+        {
+          $checked = 'checked';
+        }
+        else if($request->num_of_daysapproved == '' || $request->num_of_daysapproved == $request->days)
+        {
+          $checked = 'checked';
+        }
+        else
+        {
+           $flag = 1;
+           $days_array = explode(',',$request->days_approved);
+        }
+
+        for($i = $starting_date;$i <= $ending_date;$i++)
+        {
+          if($flag == 1)
+          {
+            $checked = '';
+            if(in_array($i,$days_array))
+            {
+              $checked = 'checked';
+            }
+          }
+          echo "<br><input type='checkbox' value='".$i."' name='leave_date[]' ".$checked.">
+                  <label for='date'> ".$i."</label>";
+        }
+        echo "<br><label class='text-danger' for='notes'>*Check to approve, uncheck to reject</label>";
+        ?>
+      </div>
 
       <div class="form-group">
         <label for="starting_date">Status</label>
