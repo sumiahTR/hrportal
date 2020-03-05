@@ -1,0 +1,3 @@
+/******ALTERING TABLE requests********/
+
+ALTER TABLE `requests` ADD `num_of_daysapproved` VARCHAR(20) NOT NULL AFTER `status`, ADD `days_approved` VARCHAR(100) NOT NULL AFTER `num_of_daysapproved`

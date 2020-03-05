@@ -102,7 +102,7 @@ class RequestController extends Controller
                     ->whereYear('requests.starting_date', date('Y'))
                     ->whereNull('requests.deleted_at');
                 })
-                ->select((DB::raw('ifnull(SUM("requests.num_of_daysapproved","requests.num_of_daysapproved","requests.days"), 0) as days_count, leave_type, leaves.days, leaves.id')))
+                ->select((DB::raw('ifnull(SUM(if("requests.num_of_daysapproved","requests.num_of_daysapproved","requests.days")), 0) as days_count, leave_type, leaves.days, leaves.id')))
                 ->groupBy('leave_type', 'leaves.days', 'leaves.id')->orderBy('leaves.id')->get();
         $weekend_off = LeaveRequest::usedWeekendOffCount($request->user->id);
         $earn_leave = LeaveRequest::usedEarnLeaveCount($request->user->id);
